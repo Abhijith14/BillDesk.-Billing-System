@@ -8,21 +8,16 @@ Public Class Form7
         Label5.Text = Father
         Label6.Text = Adno
 
-
         Dim Total As Integer = Integer.Parse(Paid) + Integer.Parse(Balance)
 
         Label11.Text = Total.ToString + ".00"
         Label13.Text = Paid + ".00"
         Label15.Text = Balance + ".00"
 
-
-        If LateF = "" Then
-            LateF = "0"
-        End If
-
-
         Label12.Text = LateF + ".00"
         Label14.Text = LateF + ".00"
+
+
 
 
         Dim Final_due As Integer = Total + Integer.Parse(LateF)
@@ -47,11 +42,10 @@ Public Class Form7
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Me.PrintForm1.PrintAction = Printing.PrintAction.PrintToPreview
-        Me.PrintForm1.Print()
 
+    End Sub
 
-
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
     End Sub
 
 End Class

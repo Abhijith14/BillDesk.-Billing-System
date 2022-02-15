@@ -57,7 +57,7 @@ Public Class Form5
     End Function
 
 
-    Function SaveExcel(sender As Object, e As EventArgs, k As Boolean)
+    Function SaveExcel(sender As Object, e As EventArgs)
         Dim pram As OleDbParameter
         Dim dr As DataRow
         Dim olecon As OleDbConnection
@@ -136,9 +136,7 @@ Public Class Form5
                         My.Settings.Save()
 
 
-                        If k = True Then
-                            Button1_Click(sender, e)
-                        End If
+                        Button1_Click(sender, e)
 
                     End If
                 End If
@@ -421,18 +419,16 @@ Public Class Form5
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        SaveExcel(sender, e, True)
+        SaveExcel(sender, e)
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         If CheckBox1.Checked = False Then
-            SaveExcel(sender, e, False)
+            SaveExcel(sender, e)
+        Else
+            Form7.FillReceipt(TextBox5.Text, TextBox2.Text, TextBox4.Text + "-" + TextBox3.Text, DateTimePicker1.Value.ToString, TextBox7.Text, TextBox1.Text, TextBox8.Text, TextBox9.Text, TextBox11.Text)
+
         End If
-
-        Form7.FillReceipt(TextBox5.Text, TextBox2.Text, TextBox4.Text + "-" + TextBox3.Text, DateTimePicker1.Value.ToString, TextBox7.Text, TextBox1.Text, TextBox8.Text, TextBox9.Text, TextBox11.Text)
-        Form7.Show()
-
-        Button1_Click(sender, e)
 
     End Sub
 
