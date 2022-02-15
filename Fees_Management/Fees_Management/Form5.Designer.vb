@@ -53,11 +53,14 @@ Partial Class Form5
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.TextBox12 = New System.Windows.Forms.TextBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -108,6 +111,7 @@ Partial Class Form5
         Me.GroupBox1.Controls.Add(Me.TextBox2)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Controls.Add(Me.TextBox12)
         Me.GroupBox1.Location = New System.Drawing.Point(39, 92)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(999, 526)
@@ -383,6 +387,17 @@ Partial Class Form5
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "Admission # :"
         '
+        'TextBox12
+        '
+        Me.TextBox12.Enabled = False
+        Me.TextBox12.Font = New System.Drawing.Font("Microsoft Sans Serif", 27.75!, System.Drawing.FontStyle.Bold)
+        Me.TextBox12.Location = New System.Drawing.Point(0, 39)
+        Me.TextBox12.Multiline = True
+        Me.TextBox12.Name = "TextBox12"
+        Me.TextBox12.Size = New System.Drawing.Size(1027, 498)
+        Me.TextBox12.TabIndex = 33
+        Me.TextBox12.Visible = False
+        '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
@@ -419,12 +434,24 @@ Partial Class Form5
         Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
         Me.PrintPreviewDialog1.Visible = False
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.Fees_Management.My.Resources.Resources.receipt
+        Me.PictureBox1.Location = New System.Drawing.Point(39, 12)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(375, 126)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 9
+        Me.PictureBox1.TabStop = False
+        Me.PictureBox1.Visible = False
+        '
         'Form5
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1089, 641)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.GroupBox1)
@@ -437,6 +464,7 @@ Partial Class Form5
         Me.Text = "Form5"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -475,5 +503,7 @@ Partial Class Form5
     Friend WithEvents Label14 As Label
     Friend WithEvents TextBox11 As TextBox
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
+    Friend WithEvents TextBox12 As TextBox
     Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

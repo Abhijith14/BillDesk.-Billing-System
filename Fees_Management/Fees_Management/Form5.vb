@@ -57,7 +57,7 @@ Public Class Form5
     End Function
 
 
-    Function SaveExcel(sender As Object, e As EventArgs, k As Boolean)
+    Function SaveExcel(sender As Object, e As EventArgs)
         Dim pram As OleDbParameter
         Dim dr As DataRow
         Dim olecon As OleDbConnection
@@ -136,9 +136,7 @@ Public Class Form5
                         My.Settings.Save()
 
 
-                        If k = True Then
-                            Button1_Click(sender, e)
-                        End If
+                        Button1_Click(sender, e)
 
                     End If
                 End If
@@ -421,18 +419,67 @@ Public Class Form5
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        SaveExcel(sender, e, True)
+        SaveExcel(sender, e)
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         If CheckBox1.Checked = False Then
-            SaveExcel(sender, e, False)
+            SaveExcel(sender, e)
+        Else
+            MsgBox("Printing !")
+            ' Printing
+            TextBox12.Text = ""
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+
+            TextBox12.AppendText(vbTab + vbTab + vbTab + vbTab + vbTab + vbTab & "Receipt" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("Employee Name: " + vbTab & TextBox2.Text + vbTab + vbTab + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+
+            TextBox12.AppendText("Basic Salary" + vbTab & TextBox2.Text + vbNewLine)
+            TextBox12.AppendText("Basic Salary2" + vbTab & TextBox2.Text + vbNewLine)
+
+            TextBox12.AppendText("===============================================================================================================" + vbNewLine)
+
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText(vbTab + vbTab & "Deductions" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("W? Tax: " + vbTab + vbTab + vbTab & TextBox2.Text + vbNewLine)
+
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("Total Deductions: " + vbTab & TextBox2.Text + vbTab + vbTab & "New Amount: " + vbTab & TextBox2.Text + vbNewLine)
+            TextBox12.AppendText("===============================================================================================================" + vbNewLine)
+            TextBox12.AppendText(vbTab + "Due Date: " + Today & vbTab + vbTab + vbTab + vbTab + vbTab + vbTab & "Time: " & TimeOfDay + vbNewLine)
+            TextBox12.AppendText("===============================================================================================================" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText(vbTab + "Recieve by: " + vbNewLine)
+            TextBox12.AppendText(vbTab + vbTab + vbTab + "________________________" + vbNewLine)
+            TextBox12.AppendText(vbTab + vbTab + vbTab + TextBox2.Text + vbNewLine)
+            TextBox12.AppendText(vbTab + vbTab + vbTab + "                          Employee" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("" + vbNewLine)
+            TextBox12.AppendText("===============================================================================================================" + vbNewLine)
+            TextBox12.AppendText("                                      Need Help?                     Contact Us: 9946883500                                     " + vbNewLine)
+            TextBox12.AppendText("===============================================================================================================" + vbNewLine)
+
+            TextBox12.AppendText(vbTab + vbTab + vbTab + PictureBox1.Text + vbNewLine)
+            PrintPreviewDialog1.ShowDialog()
         End If
-
-        Form7.FillReceipt(TextBox5.Text, TextBox2.Text, TextBox4.Text + "-" + TextBox3.Text, DateTimePicker1.Value.ToString, TextBox7.Text, TextBox1.Text, TextBox8.Text, TextBox9.Text, TextBox11.Text)
-        Form7.Show()
-
-        Button1_Click(sender, e)
 
     End Sub
 
@@ -524,5 +571,10 @@ Public Class Form5
 
     Private Sub TextBox11_TextChanged(sender As Object, e As EventArgs) Handles TextBox11.TextChanged
         TextboxOnlyNumbers(sender)
+    End Sub
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        e.Graphics.DrawString(TextBox12.Text, Font, Brushes.Black, 140, 140)
+        e.Graphics.DrawImage(Me.PictureBox1.Image, 250, 130, PictureBox1.Width, PictureBox1.Height)
     End Sub
 End Class
