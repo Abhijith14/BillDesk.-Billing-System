@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppInstaller
+	Uri="file:///C:/Users/ABHIJITH UDAYAKUMAR/source/repos/Fees_Management/WapProjTemplate1/App1Packages/WapProjTemplate1.appinstaller"
+	Version="1.0.0.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2017/2">
+	<MainBundle
+		Name="00a16532-6d4b-44c5-8384-2bd059e736da"
+		Version="1.0.0.0"
+		Publisher="CN=ABHIJITH UDAYAKUMAR"
+		Uri="file:///C:/Users/ABHIJITH UDAYAKUMAR/source/repos/Fees_Management/WapProjTemplate1/App1Packages/WapProjTemplate1_1.0.0.0_Debug_Test/WapProjTemplate1_1.0.0.0_AnyCPU_Debug.appxbundle" />
+	<UpdateSettings>
+		<OnLaunch
+			HoursBetweenUpdateChecks="0" />
+	</UpdateSettings>
+</AppInstaller>
