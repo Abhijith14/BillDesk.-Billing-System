@@ -1,0 +1,4 @@
+obj\Debug\split.pri
+obj\Debug\split.map.txt
+obj\Debug\split.scale-400.pri
+obj\Debug\split.scale-400.map.txt

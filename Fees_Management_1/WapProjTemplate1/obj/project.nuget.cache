@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "GmCnsvA4wP8IvBBiVwzkwurFFYfTXlXe9hmW1MK+/HQUFwvtfqYJ0WHAKdfCCMfa/2HxrexieFa3meAGCBgt+A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ABHIJITH UDAYAKUMAR\\source\\repos\\Fees_Management\\WapProjTemplate1\\WapProjTemplate1.wapproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages\\microsoft.windows.sdk.buildtools\\10.0.22000.194\\microsoft.windows.sdk.buildtools.10.0.22000.194.nupkg.sha512"
+  ],
+  "logs": []
+}

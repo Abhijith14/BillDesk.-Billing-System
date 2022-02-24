@@ -1,0 +1,14 @@
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\WapProjTemplate1\Images\SplashScreen.scale-200.png
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\WapProjTemplate1\Images\LockScreenLogo.scale-200.png
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\WapProjTemplate1\Images\Square150x150Logo.scale-200.png
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\WapProjTemplate1\Images\Square44x44Logo.scale-200.png
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\WapProjTemplate1\Images\Square44x44Logo.targetsize-24_altform-unplated.png
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\WapProjTemplate1\Images\StoreLogo.png
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\WapProjTemplate1\Images\Wide310x150Logo.scale-200.png
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\WapProjTemplate1\Square44x44Logo.scale-400.png
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\WapProjTemplate1\bin\AnyCPU\Debug\resources.pri
+c:\Program Files (x86)\Microsoft Visual Basic 2005 Power Packs\3.0\Microsoft.VisualBasic.PowerPacks.dll
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\Fees_Management\logo_billdesk.ico
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\Fees_Management\bin\Debug\Fees_Management.exe
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\Fees_Management\bin\Debug\Fees_Management.exe.config
+C:\Users\ABHIJITH UDAYAKUMAR\source\repos\Fees_Management\Fees_Management\bin\Debug\Fees_Management.pdb
