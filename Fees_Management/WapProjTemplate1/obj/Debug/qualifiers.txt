@@ -1,4 +1,0 @@
-AlternateForm=UNPLATED
-Scale=200
-Scale=400
-TargetSize=24
