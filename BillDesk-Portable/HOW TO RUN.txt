@@ -1,0 +1,61 @@
+============================================
+   BillDesk. - Billing System v1.0.0.3
+   Portable Distribution
+============================================
+
+PREREQUISITES
+-------------
+- Windows 10 (version 1903 or later) or Windows 11
+  (.NET Framework 4.8 is pre-installed on these systems)
+- Microsoft Excel OR Microsoft Access Database Engine
+  (needed to read/write .xlsx data files)
+
+  If Excel is NOT installed, download the free Access Database Engine:
+  https://www.microsoft.com/en-us/download/details.aspx?id=54920
+
+
+HOW TO RUN
+----------
+1. Copy this entire "BillDesk-Portable" folder to your computer
+2. Double-click "Fees_Management.exe" to launch the application
+3. On first launch, go to Settings (sidebar) and browse to select
+   the "data.xlsx" file included in this folder
+4. All navigation buttons will become enabled after selecting the file
+
+
+FILES IN THIS FOLDER
+--------------------
+Fees_Management.exe              - Main application (run this)
+Fees_Management.exe.config       - Application settings (do not delete)
+Microsoft.VisualBasic.PowerPacks.dll - Required library (do not delete)
+data.xlsx                        - Sample student data file
+HOW TO RUN.txt                   - This file
+
+
+QUICK START GUIDE
+-----------------
+1. SETTINGS  - Select your Excel data file (or use the included data.xlsx)
+2. DASHBOARD - View total outstanding fees at a glance
+3. STUDENTS  - View/search/edit student records and fee balances
+4. BILLING   - Create invoices, record payments, print receipts
+
+
+TROUBLESHOOTING
+---------------
+Problem: "Application validation did not succeed"
+  -> You may be running an old ClickOnce shortcut. Run this exe directly.
+
+Problem: "Microsoft.ACE.OLEDB.16.0 provider not registered"
+  -> Install Microsoft Access Database Engine (link above)
+
+Problem: Buttons are all disabled
+  -> Go to Settings and select a valid Excel (.xlsx) file
+
+Problem: "File is locked" error
+  -> Close the Excel file if it's open in Microsoft Excel
+
+
+PUBLISHER
+---------
+Abhijith Udayakumar
+Copyright 2022
