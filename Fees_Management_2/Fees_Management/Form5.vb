@@ -2,6 +2,9 @@
 Imports Fees_Management.numtoword
 Public Class Form5
     Private Sub Form5_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim workArea As Rectangle = Screen.PrimaryScreen.WorkingArea
+        Me.Width = Math.Min(Me.Width, workArea.Width - 250)
+        Me.Height = Math.Min(Me.Height, workArea.Height - 60)
         Me.Location = New Point(Form1.Left + 240, Form1.Top + 50)
         TextBox5.Text = generate_Invoice()
         'FillDetails()
