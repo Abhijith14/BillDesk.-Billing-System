@@ -1,0 +1,101 @@
+============================================
+   BillDesk. - Setup Guide
+   Version 1.1.0
+============================================
+
+
+QUICK START (Most PCs)
+----------------------
+Just double-click Fees_Management.exe and it should work.
+If you get any errors, follow the steps below.
+
+
+FIRST TIME SETUP
+----------------
+If you see an error like:
+  "Microsoft.ACE.OLEDB.16.0 provider is not registered"
+
+Or the app won't start at all, run the installer script:
+
+  1. Right-click "install-dependencies.bat"
+  2. Select "Run as administrator"
+  3. Wait for it to finish
+  4. Run Fees_Management.exe again
+
+
+WHAT THE SCRIPT INSTALLS
+-------------------------
+The script checks for and installs (if missing):
+
+  1. .NET Framework 4.8
+     The runtime that powers the application.
+     Already included in Windows 10 (May 2019+) and Windows 11.
+     If missing, the script downloads it from Microsoft.
+
+  2. Microsoft Access Database Engine 2016
+     Required to read/write Excel (.xlsx) files.
+     Only needed if you do NOT have Microsoft Office installed.
+     If missing, the script downloads and installs the
+     64-bit version from Microsoft.
+
+Both downloads come directly from microsoft.com.
+
+
+USING THE APP
+-------------
+  1. Launch Fees_Management.exe
+  2. Go to Settings (sidebar button)
+  3. Click Browse and select your Excel (.xlsx) data file
+     (a sample "data.xlsx" is included in this folder)
+  4. All buttons will now be enabled:
+     - Dashboard : View total outstanding fees
+     - Students  : Search and edit student records
+     - Billing   : Create invoices and print receipts
+     - Settings  : Change data file or invoice numbering
+
+
+FILES IN THIS FOLDER
+--------------------
+  Fees_Management.exe          Main application
+  Fees_Management.exe.config   App settings (do not delete)
+  Fees_Management.exe.manifest DPI scaling config (do not delete)
+  Microsoft.VisualBasic.PowerPacks.dll  Required library
+  data.xlsx                    Sample student data
+  install-dependencies.bat     Dependency installer script
+  SETUP GUIDE.txt              This file
+  HOW TO RUN.txt               Quick reference
+
+
+TROUBLESHOOTING
+---------------
+  Q: App shows blank or "provider not registered" error
+  A: Right-click install-dependencies.bat > Run as administrator
+
+  Q: Buttons are all grayed out / disabled
+  A: Go to Settings and select an Excel data file
+
+  Q: "File is locked" or "cannot access" error
+  A: Close the Excel file in Microsoft Excel first
+
+  Q: App window is too large or cut off
+  A: The app includes a DPI fix. If still cut off, try:
+     Right-click Fees_Management.exe > Properties >
+     Compatibility > Change high DPI settings >
+     Check "Override high DPI scaling" > Select "System"
+
+  Q: Script says "Administrator privileges required"
+  A: You must right-click the .bat file and choose
+     "Run as administrator" for it to install software
+
+
+SYSTEM REQUIREMENTS
+-------------------
+  - Windows 10 version 1903 or later
+  - Windows 11 (any version)
+  - Microsoft Excel OR Access Database Engine (installed by script)
+
+
+PUBLISHER
+---------
+  Abhijith Udayakumar
+  Copyright 2022-2026
