@@ -136,7 +136,7 @@ Public Class Form2
         Dim xlWorkBook As Excel.Workbook
         Dim xlWorkSheet As Excel.Worksheet
 
-        xlApp = New Excel.ApplicationClass
+        xlApp = New Excel.Application
         Dim path As String = My.Settings("ExcelPath")
         xlWorkBook = xlApp.Workbooks.Open(path)
         xlWorkSheet = xlWorkBook.Worksheets("Sheet1")
