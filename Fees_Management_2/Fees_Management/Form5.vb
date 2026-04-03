@@ -2,33 +2,23 @@
 Imports Fees_Management.numtoword
 Public Class Form5
     Private Sub Form5_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim workArea As Rectangle = Screen.PrimaryScreen.WorkingArea
-        Me.Width = Math.Min(Me.Width, workArea.Width - 250)
-        Me.Height = Math.Min(Me.Height, workArea.Height - 60)
-        Me.Location = New Point(Form1.Left + 240, Form1.Top + 50)
+        Me.DoubleBuffered = True
         TextBox5.Text = generate_Invoice()
-        'FillDetails()
     End Sub
 
     Function UpdateData(admn As String, bal As String)
         Try
-            Dim con As New OleDb.OleDbConnection
             Dim path As String = My.Settings("ExcelPath")
-            con.ConnectionString = DbHelper.GetConnectionString(path)
-            con.Open()
-
-            Dim query As String = "UPDATE [Sheet1$] SET [Amount Due] = @n1 WHERE [Enrollment No#] = @n2"
-
-
-            Using cmd = New OleDbCommand(query, con)
-                cmd.Parameters.AddWithValue("@n1", bal)
-                cmd.Parameters.AddWithValue("@n2", admn)
-                cmd.ExecuteNonQuery()
+            Using con As New OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
+                con.Open()
+                Dim query As String = "UPDATE [Sheet1$] SET [Amount Due] = @n1 WHERE [Enrollment No#] = @n2"
+                Using cmd = New OleDbCommand(query, con)
+                    cmd.Parameters.AddWithValue("@n1", bal)
+                    cmd.Parameters.AddWithValue("@n2", admn)
+                    cmd.ExecuteNonQuery()
+                End Using
             End Using
-
-
             UpdateData = True
-            con.Close()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
             UpdateData = False
@@ -39,25 +29,21 @@ Public Class Form5
     Function return_length()
         Dim rowcount As Integer
         Try
-            Dim MyConnection As System.Data.OleDb.OleDbConnection
-            Dim DtSet As System.Data.DataSet
-            Dim MyCommand As System.Data.OleDb.OleDbDataAdapter
-            Dim path As String = My.Settings("ExcelPath") '"C:\Users\ABHIJITH UDAYAKUMAR\OneDrive\Documents\Billing System User Files\data.xlsx"
-            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
-            MyCommand = New System.Data.OleDb.OleDbDataAdapter("Select * from [Sheet2$] where Invoice_No = '" + TextBox5.Text + "'", MyConnection)
-            MyCommand.TableMappings.Add("Table", "Net-informations.com")
-            DtSet = New System.Data.DataSet
-            Dim Dttbl As New DataTable()
-            MyCommand.Fill(Dttbl)
-
-            rowcount = Dttbl.Rows.Count()
-
+            Dim path As String = My.Settings("ExcelPath")
+            Using MyConnection As New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
+                Using cmd As New System.Data.OleDb.OleDbCommand("Select * from [Sheet2$] where Invoice_No = ?", MyConnection)
+                    cmd.Parameters.AddWithValue("?", TextBox5.Text)
+                    Dim MyCommand As New System.Data.OleDb.OleDbDataAdapter(cmd)
+                    MyCommand.TableMappings.Add("Table", "Net-informations.com")
+                    Dim Dttbl As New DataTable()
+                    MyCommand.Fill(Dttbl)
+                    rowcount = Dttbl.Rows.Count()
+                End Using
+            End Using
             return_length = rowcount
-
         Catch ex As Exception
             MsgBox(ex.Message.ToString)
         End Try
-
     End Function
 
 
@@ -166,40 +152,36 @@ Public Class Form5
 
     Function FillDetails()
         Try
-            Dim MyConnection As System.Data.OleDb.OleDbConnection
             Dim path As String = My.Settings("ExcelPath")
-            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
+            Using MyConnection As New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
+                Dim cmd As New System.Data.OleDb.OleDbCommand("select * from [Sheet1$]", MyConnection)
+                Dim da As New System.Data.OleDb.OleDbDataAdapter(cmd)
+                Dim dt As New DataSet
+                da.Fill(dt)
 
-            Dim cmd As New System.Data.OleDb.OleDbCommand("select * from [Sheet1$]", MyConnection)
-            Dim da As New System.Data.OleDb.OleDbDataAdapter(cmd)
-            Dim dt As New DataSet
-            da.Fill(dt)
+                Dim column1 As New AutoCompleteStringCollection
+                Dim column2 As New AutoCompleteStringCollection
+                Dim i As Integer
 
-            Dim column1 As New AutoCompleteStringCollection
-            Dim column2 As New AutoCompleteStringCollection
-            Dim i As Integer
+                Dim admnno As String
+                Dim studname As String
+                Dim base As String
+                For i = 0 To dt.Tables(0).Rows.Count - 1
+                    base = "-" + dt.Tables(0).Rows(i)(3).ToString + "-" + dt.Tables(0).Rows(i)(2).ToString + "-" + dt.Tables(0).Rows(i)(4).ToString + "-" + dt.Tables(0).Rows(i)(5).ToString + "-" + dt.Tables(0).Rows(i)(6).ToString
+                    admnno = dt.Tables(0).Rows(i)(0).ToString + "-" + dt.Tables(0).Rows(i)(1).ToString + base
+                    studname = dt.Tables(0).Rows(i)(1).ToString + "-" + dt.Tables(0).Rows(i)(0).ToString + base
+                    column1.Add(admnno)
+                    column2.Add(studname)
+                Next
 
-            Dim admnno As String
-            Dim studname As String
-            Dim base As String
-            For i = 0 To dt.Tables(0).Rows.Count - 1
-                base = "-" + dt.Tables(0).Rows(i)(3).ToString + "-" + dt.Tables(0).Rows(i)(2).ToString + "-" + dt.Tables(0).Rows(i)(4).ToString + "-" + dt.Tables(0).Rows(i)(5).ToString + "-" + dt.Tables(0).Rows(i)(6).ToString
-                admnno = dt.Tables(0).Rows(i)(0).ToString + "-" + dt.Tables(0).Rows(i)(1).ToString + base
-                studname = dt.Tables(0).Rows(i)(1).ToString + "-" + dt.Tables(0).Rows(i)(0).ToString + base
-                column1.Add(admnno)
-                column2.Add(studname)
-            Next
+                TextBox1.AutoCompleteSource = AutoCompleteSource.CustomSource
+                TextBox1.AutoCompleteCustomSource = column1
+                TextBox1.AutoCompleteMode = AutoCompleteMode.Suggest
 
-            TextBox1.AutoCompleteSource = AutoCompleteSource.CustomSource
-            TextBox1.AutoCompleteCustomSource = column1
-            TextBox1.AutoCompleteMode = AutoCompleteMode.Suggest
-
-            TextBox2.AutoCompleteSource = AutoCompleteSource.CustomSource
-            TextBox2.AutoCompleteCustomSource = column2
-            TextBox2.AutoCompleteMode = AutoCompleteMode.Suggest
-
-            MyConnection.Close()
-
+                TextBox2.AutoCompleteSource = AutoCompleteSource.CustomSource
+                TextBox2.AutoCompleteCustomSource = column2
+                TextBox2.AutoCompleteMode = AutoCompleteMode.Suggest
+            End Using
 
         Catch ex As Exception
             MsgBox(ex.Message.ToString)
@@ -208,51 +190,45 @@ Public Class Form5
 
     Function FillSearchDetails()
         Try
-            Dim MyConnection As System.Data.OleDb.OleDbConnection
             Dim path As String = My.Settings("ExcelPath")
-            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
+            Using MyConnection As New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
+                Dim cmd As New System.Data.OleDb.OleDbCommand("select * from [Sheet2$]", MyConnection)
+                Dim da As New System.Data.OleDb.OleDbDataAdapter(cmd)
+                Dim dt As New DataSet
+                da.Fill(dt)
 
-            Dim cmd As New System.Data.OleDb.OleDbCommand("select * from [Sheet2$]", MyConnection)
-            Dim da As New System.Data.OleDb.OleDbDataAdapter(cmd)
-            Dim dt As New DataSet
-            da.Fill(dt)
+                Dim column1 As New AutoCompleteStringCollection
+                Dim column2 As New AutoCompleteStringCollection
+                Dim column3 As New AutoCompleteStringCollection
+                Dim i As Integer
 
-            Dim column1 As New AutoCompleteStringCollection
-            Dim column2 As New AutoCompleteStringCollection
-            Dim column3 As New AutoCompleteStringCollection
-            Dim i As Integer
+                Dim invno As String
+                Dim admnno As String
+                Dim studname As String
+                Dim base As String
 
-            Dim invno As String
-            Dim admnno As String
-            Dim studname As String
-            Dim base As String
+                For i = 0 To dt.Tables(0).Rows.Count - 1
+                    base = "$" + dt.Tables(0).Rows(i)(4).ToString + "$" + dt.Tables(0).Rows(i)(5).ToString + "$" + dt.Tables(0).Rows(i)(6).ToString + "$" + dt.Tables(0).Rows(i)(7).ToString + "$" + dt.Tables(0).Rows(i)(8).ToString + "$" + dt.Tables(0).Rows(i)(9).ToString + "$" + dt.Tables(0).Rows(i)(11).ToString
+                    invno = dt.Tables(0).Rows(i)(0).ToString + "$" + dt.Tables(0).Rows(i)(1).ToString + "$" + dt.Tables(0).Rows(i)(2).ToString + "$" + dt.Tables(0).Rows(i)(3).ToString + base
+                    admnno = dt.Tables(0).Rows(i)(2).ToString + "$" + dt.Tables(0).Rows(i)(3).ToString + "$" + dt.Tables(0).Rows(i)(0).ToString + "$" + dt.Tables(0).Rows(i)(1).ToString + base
+                    studname = dt.Tables(0).Rows(i)(3).ToString + "$" + dt.Tables(0).Rows(i)(2).ToString + "$" + dt.Tables(0).Rows(i)(0).ToString + "$" + dt.Tables(0).Rows(i)(1).ToString + base
+                    column1.Add(invno)
+                    column2.Add(admnno)
+                    column3.Add(studname)
+                Next
 
+                TextBox5.AutoCompleteSource = AutoCompleteSource.CustomSource
+                TextBox5.AutoCompleteCustomSource = column1
+                TextBox5.AutoCompleteMode = AutoCompleteMode.Suggest
 
+                TextBox1.AutoCompleteSource = AutoCompleteSource.CustomSource
+                TextBox1.AutoCompleteCustomSource = column2
+                TextBox1.AutoCompleteMode = AutoCompleteMode.Suggest
 
-            For i = 0 To dt.Tables(0).Rows.Count - 1
-                base = "$" + dt.Tables(0).Rows(i)(4).ToString + "$" + dt.Tables(0).Rows(i)(5).ToString + "$" + dt.Tables(0).Rows(i)(6).ToString + "$" + dt.Tables(0).Rows(i)(7).ToString + "$" + dt.Tables(0).Rows(i)(8).ToString + "$" + dt.Tables(0).Rows(i)(9).ToString + "$" + dt.Tables(0).Rows(i)(11).ToString
-                invno = dt.Tables(0).Rows(i)(0).ToString + "$" + dt.Tables(0).Rows(i)(1).ToString + "$" + dt.Tables(0).Rows(i)(2).ToString + "$" + dt.Tables(0).Rows(i)(3).ToString + base
-                admnno = dt.Tables(0).Rows(i)(2).ToString + "$" + dt.Tables(0).Rows(i)(3).ToString + "$" + dt.Tables(0).Rows(i)(0).ToString + "$" + dt.Tables(0).Rows(i)(1).ToString + base
-                studname = dt.Tables(0).Rows(i)(3).ToString + "$" + dt.Tables(0).Rows(i)(2).ToString + "$" + dt.Tables(0).Rows(i)(0).ToString + "$" + dt.Tables(0).Rows(i)(1).ToString + base
-                column1.Add(invno)
-                column2.Add(admnno)
-                column3.Add(studname)
-            Next
-
-            TextBox5.AutoCompleteSource = AutoCompleteSource.CustomSource
-            TextBox5.AutoCompleteCustomSource = column1
-            TextBox5.AutoCompleteMode = AutoCompleteMode.Suggest
-
-            TextBox1.AutoCompleteSource = AutoCompleteSource.CustomSource
-            TextBox1.AutoCompleteCustomSource = column2
-            TextBox1.AutoCompleteMode = AutoCompleteMode.Suggest
-
-            TextBox2.AutoCompleteSource = AutoCompleteSource.CustomSource
-            TextBox2.AutoCompleteCustomSource = column3
-            TextBox2.AutoCompleteMode = AutoCompleteMode.Suggest
-
-            MyConnection.Close()
-
+                TextBox2.AutoCompleteSource = AutoCompleteSource.CustomSource
+                TextBox2.AutoCompleteCustomSource = column3
+                TextBox2.AutoCompleteMode = AutoCompleteMode.Suggest
+            End Using
 
         Catch ex As Exception
             MsgBox(ex.Message.ToString)
@@ -403,6 +379,7 @@ Public Class Form5
                     objTxtBox.Select(objTxtBox.Text.Length + 1, 1)
 
                 Catch ex As Exception
+                    Console.WriteLine("Input validation: " & ex.Message)
                 End Try
             End If
         End If

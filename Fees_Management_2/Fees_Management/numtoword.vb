@@ -48,7 +48,9 @@
     End Enum
 
     Public Shared Function GetRootNumberWord(ByVal number As Integer) As String
-        Return [Enum].GetName(GetType(RootNumbers), number)
+        Dim name As String = [Enum].GetName(GetType(RootNumbers), number)
+        If name Is Nothing Then Return number.ToString()
+        Return name
     End Function
 
     Public Shared Function GetNumberWords(ByVal number As Integer) As String

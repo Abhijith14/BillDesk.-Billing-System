@@ -1,11 +1,18 @@
 Imports Microsoft.Win32
 
 Module DbHelper
+    Private _cachedConnectionStringBase As String = Nothing
+
     Function GetConnectionString(path As String) As String
+        If _cachedConnectionStringBase IsNot Nothing Then
+            Return _cachedConnectionStringBase.Replace("{PATH}", path)
+        End If
+
         Dim providers() As String = {"Microsoft.ACE.OLEDB.16.0", "Microsoft.ACE.OLEDB.12.0"}
         For Each prov In providers
             If IsProviderRegistered(prov) Then
-                Return "provider=" & prov & ";Data Source='" & path & "';Extended Properties=Excel 8.0;"
+                _cachedConnectionStringBase = "provider=" & prov & ";Data Source='{PATH}';Extended Properties=Excel 8.0;"
+                Return _cachedConnectionStringBase.Replace("{PATH}", path)
             End If
         Next
         Throw New Exception(

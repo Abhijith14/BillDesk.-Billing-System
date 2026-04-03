@@ -34,7 +34,7 @@ Partial Class Form1
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.contentPanel = New System.Windows.Forms.Panel()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1.SuspendLayout()
@@ -193,15 +193,15 @@ Partial Class Form1
         '
         'GroupBox2
         '
-        Me.GroupBox2.BackColor = System.Drawing.Color.White
-        Me.GroupBox2.Location = New System.Drawing.Point(414, -30)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.GroupBox2.Size = New System.Drawing.Size(2158, 1447)
-        Me.GroupBox2.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        Me.GroupBox2.TabIndex = 1
-        Me.GroupBox2.TabStop = False
+        Me.contentPanel.BackColor = System.Drawing.Color.White
+        Me.contentPanel.Location = New System.Drawing.Point(414, -30)
+        Me.contentPanel.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.contentPanel.Name = "GroupBox2"
+        Me.contentPanel.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.contentPanel.Size = New System.Drawing.Size(2158, 1447)
+        Me.contentPanel.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        Me.contentPanel.TabIndex = 1
+        Me.contentPanel.TabStop = False
         '
         'PictureBox2
         '
@@ -229,11 +229,10 @@ Partial Class Form1
         Me.AutoScaleDimensions = New System.Drawing.SizeF(11.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(2515, 1361)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.contentPanel)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.IsMdiContainer = True
         Me.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.MaximizeBox = True
         Me.Name = "Form1"
@@ -248,7 +247,7 @@ Partial Class Form1
     End Sub
 
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents contentPanel As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents Label6 As Label
     Friend WithEvents Button2 As Button

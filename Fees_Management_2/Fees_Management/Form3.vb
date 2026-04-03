@@ -1,40 +1,31 @@
-﻿Public Class Form3
+Public Class Form3
     Private Sub Form3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim workArea As Rectangle = Screen.PrimaryScreen.WorkingArea
-        Me.Width = Math.Min(Me.Width, workArea.Width - 250)
-        Me.Height = Math.Min(Me.Height, workArea.Height - 60)
-        Me.Location = New Point(Form1.Left + 240, Form1.Top + 50)
+        Me.DoubleBuffered = True
+        ' Show date context on the dashboard
+        Label6.Text = "As of " & DateTime.Now.ToString("dd MMMM yyyy")
+        Label6.Visible = True
     End Sub
 
     Function CalculateDue()
         Try
-            Dim MyConnection As System.Data.OleDb.OleDbConnection
             Dim path As String = My.Settings("ExcelPath")
-            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
-
-            Dim dt As New DataTable()
-            Using cmd As New System.Data.OleDb.OleDbCommand("select [Amount Due] from [Sheet1$]", MyConnection)
-                MyConnection.Open()
-                Using dr As System.Data.OleDb.OleDbDataReader = cmd.ExecuteReader()
-                    dt.Load(dr)
+            Using MyConnection As New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
+                Dim dt As New DataTable()
+                Using cmd As New System.Data.OleDb.OleDbCommand("select [Amount Due] from [Sheet1$]", MyConnection)
+                    MyConnection.Open()
+                    Using dr As System.Data.OleDb.OleDbDataReader = cmd.ExecuteReader()
+                        dt.Load(dr)
+                    End Using
                 End Using
+
+                Dim sumVar As Integer = 0
+                For rowIndex As Integer = 0 To dt.Rows.Count - 1
+                    sumVar = sumVar + CInt(dt.Rows(rowIndex)(0))
+                Next
+                Label3.Text = FormatNumber(sumVar, 0)
             End Using
-
-            Dim sumVar As Integer = 0
-
-            For rowIndex As Integer = 0 To dt.Rows.Count - 1
-                sumVar = sumVar + CInt(dt.Rows(rowIndex)(0))
-            Next
-
-            Label3.Text = FormatNumber(sumVar, 0)
-
-            MyConnection.Close()
-
         Catch ex As Exception
             MsgBox(ex.Message.ToString)
         End Try
-
     End Function
-
-
 End Class
