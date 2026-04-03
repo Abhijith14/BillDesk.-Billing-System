@@ -10,7 +10,8 @@ Public Class Form5
     Function UpdateData(admn As String, bal As String)
         Try
             Dim con As New OleDb.OleDbConnection
-            con.ConnectionString = "provider=Microsoft.ACE.OLEDB.16.0;Data Source='" + My.Settings("ExcelPath") + "';Extended Properties=Excel 8.0;"
+            Dim path As String = My.Settings("ExcelPath")
+            con.ConnectionString = DbHelper.GetConnectionString(path)
             con.Open()
 
             Dim query As String = "UPDATE [Sheet1$] SET [Amount Due] = @n1 WHERE [Enrollment No#] = @n2"
@@ -39,7 +40,7 @@ Public Class Form5
             Dim DtSet As System.Data.DataSet
             Dim MyCommand As System.Data.OleDb.OleDbDataAdapter
             Dim path As String = My.Settings("ExcelPath") '"C:\Users\ABHIJITH UDAYAKUMAR\OneDrive\Documents\Billing System User Files\data.xlsx"
-            MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.ACE.OLEDB.16.0;Data Source='" + path + "';Extended Properties=Excel 8.0;")
+            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
             MyCommand = New System.Data.OleDb.OleDbDataAdapter("Select * from [Sheet2$] where Invoice_No = '" + TextBox5.Text + "'", MyConnection)
             MyCommand.TableMappings.Add("Table", "Net-informations.com")
             DtSet = New System.Data.DataSet
@@ -67,7 +68,8 @@ Public Class Form5
         Dim ds As DataSet
         Try
             olecon = New OleDbConnection
-            olecon.ConnectionString = "provider=Microsoft.ACE.OLEDB.16.0;Data Source='" + My.Settings("ExcelPath") + "';Extended Properties=Excel 8.0;"
+            Dim path As String = My.Settings("ExcelPath")
+            olecon.ConnectionString = DbHelper.GetConnectionString(path)
             olecomm = New OleDbCommand
             'olecomm.CommandText = "Select * from [Sheet2$] where Invoice_No = '" + TextBox5.Text + "'"
             olecomm.CommandText = "Select * from [Sheet2$]"
@@ -163,7 +165,7 @@ Public Class Form5
         Try
             Dim MyConnection As System.Data.OleDb.OleDbConnection
             Dim path As String = My.Settings("ExcelPath")
-            MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.ACE.OLEDB.16.0;Data Source='" + path + "';Extended Properties=Excel 8.0;")
+            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
 
             Dim cmd As New System.Data.OleDb.OleDbCommand("select * from [Sheet1$]", MyConnection)
             Dim da As New System.Data.OleDb.OleDbDataAdapter(cmd)
@@ -205,7 +207,7 @@ Public Class Form5
         Try
             Dim MyConnection As System.Data.OleDb.OleDbConnection
             Dim path As String = My.Settings("ExcelPath")
-            MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.ACE.OLEDB.16.0;Data Source='" + path + "';Extended Properties=Excel 8.0;")
+            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
 
             Dim cmd As New System.Data.OleDb.OleDbCommand("select * from [Sheet2$]", MyConnection)
             Dim da As New System.Data.OleDb.OleDbDataAdapter(cmd)

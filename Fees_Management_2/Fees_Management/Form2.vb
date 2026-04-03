@@ -15,7 +15,7 @@ Public Class Form2
             Dim DtSet As System.Data.DataSet
             Dim MyCommand As System.Data.OleDb.OleDbDataAdapter
             Dim path As String = My.Settings("ExcelPath") '"C:\Users\ABHIJITH UDAYAKUMAR\OneDrive\Documents\Billing System User Files\data.xlsx"
-            MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.ACE.OLEDB.16.0;Data Source='" + path + "';Extended Properties=Excel 8.0;")
+            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
             MyCommand = New System.Data.OleDb.OleDbDataAdapter("select * from [Sheet1$]", MyConnection)
             MyCommand.TableMappings.Add("Table", "Net-informations.com")
             DtSet = New System.Data.DataSet
@@ -91,7 +91,7 @@ Public Class Form2
             Dim DtSet As System.Data.DataSet
             Dim MyCommand As System.Data.OleDb.OleDbDataAdapter
             Dim path As String = My.Settings("ExcelPath")
-            MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.ACE.OLEDB.16.0;Data Source='" + path + "';Extended Properties=Excel 8.0;")
+            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
             MyCommand = New System.Data.OleDb.OleDbDataAdapter("select * from [Sheet1$] where [Enrollment No#] LIKE '" + TextBox2.Text + "%'", MyConnection)
             MyCommand.TableMappings.Add("Table", "Net-informations.com")
             DtSet = New System.Data.DataSet
@@ -112,7 +112,7 @@ Public Class Form2
             Dim DtSet As System.Data.DataSet
             Dim MyCommand As System.Data.OleDb.OleDbDataAdapter
             Dim path As String = My.Settings("ExcelPath")
-            MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.ACE.OLEDB.16.0;Data Source='" + path + "';Extended Properties=Excel 8.0;")
+            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
             MyCommand = New System.Data.OleDb.OleDbDataAdapter("select * from [Sheet1$] where [Student Name] LIKE '%" + TextBox1.Text + "%'", MyConnection)
             MyCommand.TableMappings.Add("Table", "Net-informations.com")
             DtSet = New System.Data.DataSet

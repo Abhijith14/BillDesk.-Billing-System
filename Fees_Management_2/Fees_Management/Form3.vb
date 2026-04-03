@@ -7,7 +7,7 @@
         Try
             Dim MyConnection As System.Data.OleDb.OleDbConnection
             Dim path As String = My.Settings("ExcelPath")
-            MyConnection = New System.Data.OleDb.OleDbConnection("provider=Microsoft.ACE.OLEDB.16.0;Data Source='" + path + "';Extended Properties=Excel 8.0;")
+            MyConnection = New System.Data.OleDb.OleDbConnection(DbHelper.GetConnectionString(path))
 
             Dim dt As New DataTable()
             Using cmd As New System.Data.OleDb.OleDbCommand("select [Amount Due] from [Sheet1$]", MyConnection)

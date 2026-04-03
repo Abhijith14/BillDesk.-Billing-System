@@ -1,5 +1,6 @@
 ﻿Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.WindowState = FormWindowState.Maximized
 
         Dim dash_icon As New Bitmap(New Bitmap(My.Resources.dash_icon), 30, 30)
         Dim stud_icon As New Bitmap(New Bitmap(My.Resources.stud_data), 30, 30)
