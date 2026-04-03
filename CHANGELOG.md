@@ -4,6 +4,10 @@
 
 ### Critical Bug Fixes
 
+#### App Stuck on Splash Screen — FIXED
+- **Root cause:** `Application.Designer.vb` (auto-generated) was not regenerated after changing `Application.myapp`. It still pointed `MainForm` to `Form6` (now an empty stub), so the app loaded a blank form and never showed the main window.
+- **Fix:** Manually updated `Application.Designer.vb` to set `Me.MainForm = Global.Fees_Management.Form1`.
+
 #### White Screen / Forms Disappearing — FIXED
 - **Root cause:** `Form1` was set as `IsMdiContainer = True` but child forms were standalone windows, not MDI children. A white `GroupBox2` (2158x1447px) sat on top in z-order and covered child forms when they lost focus.
 - **Fix:** Removed `IsMdiContainer`. Replaced `GroupBox2` with a `Panel` (`contentPanel`). Child forms are now embedded inside the panel using `TopLevel = False` and `Dock = DockStyle.Fill`. Forms can never be covered or lost.
@@ -49,9 +53,9 @@ All database connections across `Form2`, `Form3`, `Form4`, and `Form5` now use `
 
 ### UI/UX Improvements
 
-- **Active navigation indicator** — The currently selected sidebar button is highlighted in blue with white text
-- **Button hover effects** — Navigation buttons show a light blue hover state for visual feedback
-- **Flat modern button style** — Sidebar buttons use `FlatStyle.Flat` with subtle borders
+- **Active navigation indicator** — The currently selected sidebar button is highlighted with a soft pastel blue tint, keeping icons and text clearly visible
+- **Button hover effects** — Navigation buttons show a subtle light blue hover state for visual feedback
+- **Flat modern button style** — Sidebar buttons use `FlatStyle.Flat` with subtle borders and hand cursor
 - **Exit confirmation** — Logout now asks "Are you sure you want to exit?" before closing
 - **Dashboard date context** — Shows "As of [today's date]" on the dashboard
 - **Loading cursor** — Student data reload shows a wait cursor during load
@@ -68,7 +72,8 @@ All database connections across `Form2`, `Form3`, `Form4`, and `Form5` now use `
 8. `DbHelper.vb` — Connection string caching
 9. `numtoword.vb` — Null safety check
 10. `My Project/Application.myapp` — MainForm changed to Form1
-11. `Fees_Management.vbproj` — Debug platform to x64, removed UserControl1
+11. `My Project/Application.Designer.vb` — Updated auto-generated MainForm reference to Form1
+12. `Fees_Management.vbproj` — Debug platform to x64, removed UserControl1
 
 ### Files Removed
 - `UserControl1.vb` — Unused empty user control
