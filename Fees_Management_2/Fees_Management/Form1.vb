@@ -2,10 +2,11 @@ Public Class Form1
     Private _currentChildForm As Form = Nothing
     Private _activeButton As Button = Nothing
 
-    ' UI accent color for active nav button
-    Private ReadOnly ActiveColor As Color = Color.FromArgb(53, 95, 221)
+    ' UI accent color for active nav button — soft light blue tint
+    Private ReadOnly ActiveColor As Color = Color.FromArgb(218, 232, 252)
+    Private ReadOnly ActiveBorderColor As Color = Color.FromArgb(53, 95, 221)
     Private ReadOnly DefaultColor As Color = Color.White
-    Private ReadOnly HoverColor As Color = Color.FromArgb(230, 238, 255)
+    Private ReadOnly HoverColor As Color = Color.FromArgb(238, 244, 255)
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
@@ -73,13 +74,13 @@ Public Class Form1
         If _activeButton IsNot Nothing Then
             _activeButton.BackColor = DefaultColor
             _activeButton.FlatAppearance.BorderColor = Color.FromArgb(220, 225, 235)
-            _activeButton.ForeColor = ActiveColor
+            _activeButton.ForeColor = Color.FromArgb(53, 95, 221)
         End If
 
-        ' Highlight the new active button
+        ' Highlight the new active button — soft tint with blue left border
         btn.BackColor = ActiveColor
-        btn.FlatAppearance.BorderColor = ActiveColor
-        btn.ForeColor = Color.White
+        btn.FlatAppearance.BorderColor = ActiveBorderColor
+        btn.ForeColor = Color.FromArgb(30, 60, 160)
         _activeButton = btn
     End Sub
 
